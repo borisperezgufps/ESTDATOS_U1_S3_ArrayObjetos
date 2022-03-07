@@ -15,12 +15,30 @@ public class Biblioteca {
 	 * @param anio
 	 * @param prestado Indica si está prestado (true) o si no está prestado (false)
 	 * @param activo Indica si está activo (true) o si está dado de baja (false)
-	 * @return Retorna el identificador del libro
+	 * @return Retorna el identificador del libro. 
 	 */
-	public int agregarLibro(String titulo, String nombreAutor, int anio, boolean prestado, boolean activo) {
+	public int agregarLibro(String titulo, String nombreAutor, int anio, boolean prestado, boolean activo) throws Exception {
 		
+		Libro lib = new Libro();
+		lib.setTitulo(titulo);
+		lib.setNombreAutor(nombreAutor);
+		lib.setAnio(anio);
+		lib.setPrestado(prestado);
+		lib.setActivo(activo);
 		
-		return 0;
+		boolean agregado = false;
+		
+		for(int t=0;t<libros.length;t++) {
+			if(libros[t]==null) {
+				libros[t] = lib;
+				agregado = true;
+			}
+		}
+		
+		if(agregado)
+			return 0;
+		else
+			throw new Exception("El libro no se pudo agregar");
 	}
 	
 	/**
