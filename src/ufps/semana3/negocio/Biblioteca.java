@@ -9,17 +9,18 @@ public class Biblioteca {
 	}
 	
 	/**
-	 * Agrega un libro a la biblioteca. El ID se asigna automáticamente con el valor de la posición en el arreglo.
+	 * Agrega un libro a la biblioteca. El ID se asigna automï¿½ticamente con el valor de la posiciï¿½n en el arreglo.
 	 * @param titulo
 	 * @param nombreAutor
 	 * @param anio
-	 * @param prestado Indica si está prestado (true) o si no está prestado (false)
-	 * @param activo Indica si está activo (true) o si está dado de baja (false)
+	 * @param prestado Indica si estï¿½ prestado (true) o si no estï¿½ prestado (false)
+	 * @param activo Indica si estï¿½ activo (true) o si estï¿½ dado de baja (false)
 	 * @return Retorna el identificador del libro. 
 	 */
 	public int agregarLibro(String titulo, String nombreAutor, int anio, boolean prestado, boolean activo) throws Exception {
 		
 		Libro lib = new Libro();
+		
 		lib.setTitulo(titulo);
 		lib.setNombreAutor(nombreAutor);
 		lib.setAnio(anio);
@@ -27,24 +28,29 @@ public class Biblioteca {
 		lib.setActivo(activo);
 		
 		boolean agregado = false;
+		int id = 0;
 		
 		for(int t=0;t<libros.length;t++) {
 			if(libros[t]==null) {
 				libros[t] = lib;
 				agregado = true;
+				id = t;
+				break;
 			}
 		}
 		
-		if(agregado)
-			return 0;
+		if(agregado) {
+			lib.setId(id);
+			return id;
+		}
 		else
 			throw new Exception("El libro no se pudo agregar");
 	}
 	
 	/**
-	 * Permite que se realice el préstamo de un libro, a partir de su identificador
+	 * Permite que se realice el prï¿½stamo de un libro, a partir de su identificador
 	 * @param idLibro
-	 * @throws Exception Lanza excepción si el libro no se encuentra en la biblioteca
+	 * @throws Exception Lanza excepciï¿½n si el libro no se encuentra en la biblioteca
 	 */
 	public void prestarLibro(int idLibro) throws Exception{
 		
@@ -59,31 +65,31 @@ public class Biblioteca {
 		}
 		
 		if(!asignado)
-			throw new Exception("El libro no se encontró. Verifique el identificador");
+			throw new Exception("El libro no se encontrï¿½. Verifique el identificador");
 		
 	}
 	
 	/**
 	 * Retira el libro de la biblioteca, y por lo tanto no puede volverse a prestar.
 	 * @param idLibro
-	 * @throws Exception Lanza excepción si el libro no se encuentra en la biblioteca
+	 * @throws Exception Lanza excepciï¿½n si el libro no se encuentra en la biblioteca
 	 */
 	public void retirarLibro(int idLibro) throws Exception {
 		boolean retirado = false;
 		
 		for(Libro lib : libros) {
 			if(lib.getId()==idLibro) {
-				lib.setActivo(true);
+				lib.setActivo(false);
 				retirado = true;
 				break;
 			}
 		}
 		
 		if(!retirado)
-			throw new Exception("El libro no se encontró. Verifique el identificador");
+			throw new Exception("El libro no se encontrï¿½. Verifique el identificador");
 		
-		// Importante, este método afecta a otro método de esta clase ya que no se estaría
-		// considerando si el libro está activo.
+		// Importante, este mï¿½todo afecta a otro mï¿½todo de esta clase ya que no se estarï¿½a
+		// considerando si el libro estï¿½ activo.
 	}
 	
 	/**
@@ -126,7 +132,7 @@ public class Biblioteca {
 	
 	/**
 	 * Encuentra y retorna un arreglo con todas las coincidencias de libros
-	 * a partir del título
+	 * a partir del tï¿½tulo
 	 * @param titulo
 	 * @return
 	 */
@@ -137,7 +143,7 @@ public class Biblioteca {
 	
 	/**
 	 * Encuentra y retorna un arreglo con todas las coincidencias de libros
-	 * que correspondan con el año indicado
+	 * que correspondan con el aï¿½o indicado
 	 * @param anio
 	 * @return
 	 */
