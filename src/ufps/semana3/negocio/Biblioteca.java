@@ -79,9 +79,11 @@ public class Biblioteca {
 		
 		for(Libro lib : libros) {
 			if(lib.getId()==idLibro) {
-				lib.setActivo(false);
-				retirado = true;
-				break;
+				if(lib.isPrestado()==false) {
+					lib.setActivo(false);
+					retirado = true;
+					break;
+				}
 			}
 		}
 		
